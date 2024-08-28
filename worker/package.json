@@ -1,0 +1,21 @@
+{
+  "name": "@ws-dashboard/worker",
+  "version": "1.0.0",
+  "main": "src/app.ts",
+  "scripts": {
+    "dev": "nodemon src/app.ts"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.5.1",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "@ws-dashboard/types": "workspace:*",
+    "@ws-dashboard/store": "workspace:*"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.4.1"
+  }
+}

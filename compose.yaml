@@ -1,0 +1,6 @@
+services:
+  redis:
+    build: ./redis
+  worker:
+    build:
+      dockerfile: ./worker.Dockerfile

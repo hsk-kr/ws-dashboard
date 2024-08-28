@@ -1,0 +1,16 @@
+{
+  "name": "ws-dashboard",
+  "version": "1.0.0",
+  "scripts": {
+    "compose": "docker compose down && docker compose up --build",
+    "client:dev": "pnpm --filter client dev",
+    "server:dev": "pnpm --filter server dev",
+    "data:dev": "pnpm --filter data dev",
+    "test": "vitest"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "vitest": "^2.0.5"
+  }
+}

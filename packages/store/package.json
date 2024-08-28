@@ -1,0 +1,9 @@
+{
+  "name": "@ws-dashboard/store",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "ioredis": "^5.4.1",
+    "@ws-dashboard/types": "workspace:*"
+  }
+}
