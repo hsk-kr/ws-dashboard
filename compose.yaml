@@ -3,4 +3,5 @@ services:
     build: ./redis
   worker:
     build:
-      dockerfile: ./worker.Dockerfile
+      context: .
+      dockerfile: ./worker/Dockerfile
