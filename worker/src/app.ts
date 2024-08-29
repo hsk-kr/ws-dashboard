@@ -2,7 +2,7 @@ import { Redis } from 'ioredis';
 import 'dotenv/config';
 
 import { fetchEndpointData } from './lib/api';
-import { addEndpointData, addEndpointError } from '@ws-dashboard/store';
+import { addEndpointDataMap, addEndpointError } from '@ws-dashboard/store';
 import { EndpointDataMap, endpoints } from '@ws-dashboard/types/endpoints';
 
 const redis = new Redis({
@@ -43,7 +43,7 @@ const main = async () => {
 		}
 
 		if (isEndpointDataMap(endpointDataMap)) {
-			await addEndpointData(redis, endpointDataMap);
+			await addEndpointDataMap(redis, endpointDataMap);
 		} else {
 			console.error(
 				"endpointDataMap doesn'nt have all endpoints",

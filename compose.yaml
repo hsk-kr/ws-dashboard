@@ -8,6 +8,8 @@ services:
     build:
       context: .
       dockerfile: ./worker/Dockerfile
+    volumes:
+      - ./worker:/app/worker
   server:
     build:
       context: .

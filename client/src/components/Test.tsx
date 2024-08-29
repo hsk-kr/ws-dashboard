@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import WebSocketClient from './WebSocketClient';
 import WebSocketReceiver from './WebSocketReceiver';
-import useMonitoringData from '../hooks/useMonitoringData';
+import useEndpointData from '../hooks/useEndpointData';
 
 export default function Test() {
 	const [ws, setWs] = useState<WebSocket>();
 	const [error, setError] = useState<Event>();
-	const { monitoringData } = useMonitoringData();
+	const { endpointData } = useEndpointData();
+
+	useEffect(() => {
+		console.log('data', endpointData);
+	}, [endpointData]);
 
 	return (
 		<div>

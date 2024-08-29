@@ -1,11 +1,11 @@
-import { MonitoringDataProvider } from './store/MonitoringDataContext';
+import { EndpointDataProvider } from './store/EndpointDataContext';
 import Test from './components/Test';
 
 function App() {
 	return (
-		<MonitoringDataProvider>
+		<EndpointDataProvider>
 			<Test />
-		</MonitoringDataProvider>
+		</EndpointDataProvider>
 	);
 }
 
