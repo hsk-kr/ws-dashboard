@@ -5,7 +5,6 @@
     "compose": "docker compose down && docker compose up --build",
     "client:dev": "pnpm --filter client dev",
     "server:dev": "pnpm --filter server dev",
-    "data:dev": "pnpm --filter data dev",
     "worker:dev": "pnpm --filter worker dev",
     "test": "vitest run",
     "compose:test": "docker compose -f test-compose.yaml down && docker compose -f test-compose.yaml up --abort-on-container-exit --build"
