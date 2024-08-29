@@ -12,7 +12,7 @@ export default function Test() {
 		<div>
 			<WebSocketClient onConnected={setWs} onError={setError} />
 			<WebSocketReceiver ws={ws} />
-			Hello Vite~!
+			<div className="btn text-3xl font-bold">Hello Vite~!</div>
 		</div>
 	);
 }
