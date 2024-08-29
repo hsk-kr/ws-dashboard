@@ -21,8 +21,8 @@ describe('addEndpointData and getEndpointData', async () => {
     const saEastEndpointData = await getEndpointData(redis, 'sa-east');
     expect(saEastEndpointData).length(2);
 
-    expect(saEastEndpointData[0]).toEqual({ test: 1 });
-    expect(saEastEndpointData[1]).toEqual({ test: 2 });
+    expect(saEastEndpointData[0].response).toEqual({ test: 1 });
+    expect(saEastEndpointData[1].response).toEqual({ test: 2 });
   });
 
   test("endPointdata shouldn't be over 5 items.", async () => {

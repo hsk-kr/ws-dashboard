@@ -1,5 +1,9 @@
 import { Redis } from 'ioredis';
-import { Endpoint, EndpointError } from '@ws-dashboard/types/endpoints';
+import {
+  Endpoint,
+  EndpointError,
+  EndpointData,
+} from '@ws-dashboard/types/endpoints';
 import { MonitoringAPIResponse } from '@ws-dashboard/types/api';
 
 export const MAX_STORE_ENDPOINTS_LENGTH = 5;
@@ -17,13 +21,19 @@ export const addEndpointData = async (
     await redis.lpop(endpoint);
   }
 
-  await redis.rpush(endpoint, JSON.stringify(data));
+  const endpointData: EndpointData = {
+    endpoint,
+    response: data,
+    date: new Date().toISOString(),
+  };
+
+  await redis.rpush(endpoint, JSON.stringify(endpointData));
 };
 
 export const getEndpointData = async (
   redis: Redis,
   endpoint: Endpoint
-): Promise<MonitoringAPIResponse[]> => {
+): Promise<EndpointData[]> => {
   return (await redis.lrange(endpoint, 0, -1)).map((d) => JSON.parse(d));
 };
 
