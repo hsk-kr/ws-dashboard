@@ -1,0 +1,7 @@
+services:
+  test-redis:
+    build: ./redis
+  test:
+    build:
+      context: .
+      dockerfile: ./test.Dockerfile

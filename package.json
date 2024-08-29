@@ -6,7 +6,8 @@
     "client:dev": "pnpm --filter client dev",
     "server:dev": "pnpm --filter server dev",
     "data:dev": "pnpm --filter data dev",
-    "test": "vitest"
+    "test": "vitest run",
+    "compose:test": "docker compose -f test-compose.yaml down && docker compose -f test-compose.yaml up --build"
   },
   "license": "MIT",
   "devDependencies": {

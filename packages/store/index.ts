@@ -14,10 +14,10 @@ export const addEndpointData = async (
   const length = await redis.llen(endpoint);
 
   if (length >= MAX_STORE_ENDPOINTS_LENGTH) {
-    await redis.rpop(endpoint);
+    await redis.lpop(endpoint);
   }
 
-  await redis.lpush(endpoint, JSON.stringify(data));
+  await redis.rpush(endpoint, JSON.stringify(data));
 };
 
 export const getEndpointData = async (
@@ -28,7 +28,7 @@ export const getEndpointData = async (
 };
 
 export const addEndpointError = async (redis: Redis, error: EndpointError) => {
-  await redis.lpush(ENDPOINT_ERROR_REDIS_KEY, JSON.stringify(error));
+  await redis.rpush(ENDPOINT_ERROR_REDIS_KEY, JSON.stringify(error));
 };
 
 export const getEndpointDataError = async (
