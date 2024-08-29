@@ -2,7 +2,7 @@ import { Redis } from 'ioredis';
 import 'dotenv/config';
 
 import { fetchEndpointData } from './lib/api';
-import { addEndpointData } from '@ws-dashboard/store';
+import { addEndpointData, addEndpointError } from '@ws-dashboard/store';
 import { endpoints } from '@ws-dashboard/types/endpoints';
 
 const redis = new Redis({
@@ -18,7 +18,9 @@ const main = async () => {
 				const data = await fetchEndpointData(endpoint);
 				await addEndpointData(redis, endpoint, data);
 			} catch (error) {
-				console.error({ endpoint, error });
+				const endpointError = { endpoint, error };
+				await addEndpointError(redis, endpointError);
+				console.error(endpointError);
 			}
 		}
 

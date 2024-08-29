@@ -8,3 +8,8 @@ export const endpoints = [
 ] as const;
 
 export type Endpoint = (typeof endpoints)[number];
+
+export interface EndpointError {
+	endpoint: Endpoint;
+	error: unknown;
+}
