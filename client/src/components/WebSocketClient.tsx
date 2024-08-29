@@ -5,8 +5,6 @@ interface WebSocketClientProps {
 	onError?: (error: Event) => void;
 }
 
-const RECONNECT_TIME = 5000;
-
 export default function WebSocketClient({
 	onConnected,
 	onError,
@@ -21,20 +19,6 @@ export default function WebSocketClient({
 		ws.onerror = (e) => {
 			ws.close();
 			onError?.(e);
-
-			setTimeout(() => {
-				connect();
-			}, RECONNECT_TIME);
-		};
-
-		ws.onclose = () => {
-			if (ws.readyState === WebSocket.OPEN) {
-				ws.close();
-			}
-
-			setTimeout(() => {
-				connect();
-			}, RECONNECT_TIME);
 		};
 	}, []);
 
