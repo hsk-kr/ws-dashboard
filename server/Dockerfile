@@ -8,4 +8,6 @@ WORKDIR /app
 
 RUN pnpm install
 
-CMD ["pnpm","run", "worker:dev"]
+EXPOSE 8080
+
+CMD ["pnpm","run","server:dev"]
