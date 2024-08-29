@@ -3,7 +3,14 @@ version: '3.8'
 services:
   test-redis:
     build: ./redis
+    networks:
+      - test
   test:
     build:
       context: .
       dockerfile: ./test.Dockerfile
+    networks:
+      - test
+
+networks:
+  test:

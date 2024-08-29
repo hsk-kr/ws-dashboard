@@ -11,6 +11,8 @@ export const endpoints = [
 
 export type Endpoint = (typeof endpoints)[number];
 
+export type EndpointDataMap = Record<Endpoint, EndpointData | undefined>;
+
 export interface EndpointData {
 	endpoint: Endpoint;
 	response: MonitoringAPIResponse;
