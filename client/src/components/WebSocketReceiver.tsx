@@ -1,19 +1,24 @@
 import { useEffect } from 'react';
 import useEndpointData from '../hooks/useEndpointData';
+import { unwrapData } from '@ws-dashboard/data';
 
 interface WebSocketReceiverProps {
-	ws?: WebSocket;
+  ws?: WebSocket;
 }
 
 export default function WebSocketReceiver({ ws }: WebSocketReceiverProps) {
-	const { setEndpointData } = useEndpointData();
-	useEffect(() => {
-		if (!ws) return;
+  const { setEndpointData } = useEndpointData();
+  useEffect(() => {
+    if (!ws) return;
 
-		ws.onmessage = (e) => {
-			setEndpointData(JSON.parse(e.data));
-		};
-	}, [ws]);
+    ws.onmessage = (e) => {
+      const data = unwrapData(e.data);
 
-	return null;
+      if (data.type === 'endpointData') {
+        setEndpointData(data.payload);
+      }
+    };
+  }, [ws]);
+
+  return null;
 }

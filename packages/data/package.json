@@ -1,0 +1,8 @@
+{
+  "name": "@ws-dashboard/data",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "@ws-dashboard/types": "workspace:*"
+  }
+}

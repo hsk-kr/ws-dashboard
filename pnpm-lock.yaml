@@ -17,6 +17,9 @@ importers:
 
   client:
     dependencies:
+      '@ws-dashboard/data':
+        specifier: workspace:*
+        version: link:../packages/data
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -73,6 +76,12 @@ importers:
         specifier: ^5.4.1
         version: 5.4.2(@types/node@22.5.1)
 
+  packages/data:
+    dependencies:
+      '@ws-dashboard/types':
+        specifier: workspace:*
+        version: link:../types
+
   packages/store:
     dependencies:
       '@ws-dashboard/types':
@@ -86,6 +95,9 @@ importers:
 
   server:
     dependencies:
+      '@ws-dashboard/data':
+        specifier: workspace:*
+        version: link:../packages/data
       '@ws-dashboard/store':
         specifier: workspace:*
         version: link:../packages/store
