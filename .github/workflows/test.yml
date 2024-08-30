@@ -1,0 +1,20 @@
+name: Test
+
+on:
+  push:
+    branches: ['main']
+
+permissions:
+  contents: read
+
+jobs:
+  webserver-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run Test
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: './test-compose.yml'
+          up-flags: '--build --abort-on-container-exit'
