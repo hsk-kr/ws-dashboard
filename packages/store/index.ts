@@ -1,7 +1,7 @@
 import { Redis } from 'ioredis';
 import { EndpointError, EndpointDataMap } from '@ws-dashboard/types/endpoints';
 
-export const MAX_STORE_ENDPOINTS_LENGTH = 5;
+export const MAX_STORE_ENDPOINTS_LENGTH = 30;
 
 export const ENDPOINT_ERROR_REDIS_KEY = 'endpoint_error';
 export const ENDPOINT_REDIS_KEY = 'endpoint';
