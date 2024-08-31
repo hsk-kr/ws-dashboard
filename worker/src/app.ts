@@ -4,6 +4,7 @@ import 'dotenv/config';
 import { fetchEndpointData } from './lib/api';
 import { addEndpointDataMap, addEndpointError } from '@ws-dashboard/store';
 import { EndpointDataMap, endpoints } from '@ws-dashboard/types/endpoints';
+import { getCurrentDateTimeAsString } from '@ws-dashboard/date';
 
 const redis = new Redis({
 	host: process.env.REDIS_HOST,
@@ -31,7 +32,7 @@ const main = async () => {
 				endpointDataMap[endpoint] = {
 					endpoint,
 					response: data,
-					date: new Date().toISOString(),
+					date: getCurrentDateTimeAsString(),
 				};
 			} catch (error) {
 				endpointDataMap[endpoint] = undefined;
@@ -50,7 +51,7 @@ const main = async () => {
 				endpointDataMap
 			);
 		}
-		console.log(`${new Date().toISOString()}: Fetched all data.`);
+		console.log(`${getCurrentDateTimeAsString()}: Fetched all data.`);
 	};
 
 	fetchAndSaveAllEndpointData();
