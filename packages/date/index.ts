@@ -10,9 +10,9 @@ export const getCurrentDateTimeAsString = () => {
 };
 
 export const formatLocalDateTime = (datetime: string) => {
-	return dayjs(datetime).format('YYYY-MM-DD HH:mm:ss');
+	return dayjs(datetime).local().format('YYYY-MM-DD HH:mm:ss');
 };
 
 export const fromNow = (datetime: string) => {
-	return dayjs(datetime).fromNow();
+	return dayjs(datetime).utc().fromNow();
 };
