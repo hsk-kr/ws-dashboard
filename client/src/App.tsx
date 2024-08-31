@@ -1,12 +1,12 @@
 import { EndpointDataProvider } from './store/EndpointDataContext';
-import Test from './components/Test';
+import Dashboard from './pages/Dashboard';
 
 function App() {
-	return (
-		<EndpointDataProvider>
-			<Test />
-		</EndpointDataProvider>
-	);
+  return (
+    <EndpointDataProvider>
+      <Dashboard />
+    </EndpointDataProvider>
+  );
 }
 
 export default App;
