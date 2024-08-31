@@ -14,7 +14,9 @@ export default function BasicTemplate({ children }: BasicTemplateProps) {
         <Sidebar />
       </div>
       <div className="flex-1 flex flex-col h-full">
-        <MobileNavbar />
+        <div className="md:hidden">
+          <MobileNavbar />
+        </div>
         <div className="hidden md:block">
           <Toolbar />
         </div>
