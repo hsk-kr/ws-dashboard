@@ -1,29 +1,53 @@
 import {
-	createContext,
-	Dispatch,
-	ReactNode,
-	SetStateAction,
-	useState,
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useMemo,
+  useState,
 } from 'react';
-import { EndpointDataMap } from '@ws-dashboard/types/endpoints';
+import {
+  Endpoint,
+  EndpointData,
+  EndpointDataMap,
+} from '@ws-dashboard/types/endpoints';
 
 interface EndpointDataContextType {
-	endpointData: EndpointDataMap[];
-	setEndpointData: Dispatch<SetStateAction<EndpointDataMap[]>>;
+  endpointData: EndpointDataMap[];
+  region: Endpoint;
+  latestEndpointData?: EndpointData;
+  setRegion: Dispatch<SetStateAction<Endpoint>>;
+  setEndpointData: Dispatch<SetStateAction<EndpointDataMap[]>>;
 }
 
 export const EndpointDataContext = createContext<EndpointDataContextType>(
-	{} as EndpointDataContextType
+  {} as EndpointDataContextType
 );
 
 export const EndpointDataProvider = ({ children }: { children: ReactNode }) => {
-	const [endpointData, setEndpointData] = useState<EndpointDataMap[]>([]);
+  const [endpointData, setEndpointData] = useState<EndpointDataMap[]>([]);
+  const [region, setRegion] = useState<Endpoint>('us-east');
+  const latestEndpointData = useMemo<
+    EndpointDataContextType['latestEndpointData']
+  >(() => {
+    for (const data of endpointData.reverse()) {
+      if (data[region] !== undefined) return data[region];
+    }
 
-	const value = { endpointData, setEndpointData };
+    return undefined;
+  }, [region, endpointData]);
 
-	return (
-		<EndpointDataContext.Provider value={value}>
-			{children}
-		</EndpointDataContext.Provider>
-	);
+  const value = {
+    endpointData,
+    setEndpointData,
+    region,
+    setRegion,
+    latestEndpointData,
+  };
+
+  return (
+    <EndpointDataContext.Provider value={value}>
+      {children}
+    </EndpointDataContext.Provider>
+  );
 };

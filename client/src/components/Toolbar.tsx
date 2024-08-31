@@ -1,4 +1,7 @@
-import { endpoints } from '@ws-dashboard/types/endpoints';
+import { Endpoint, endpoints } from '@ws-dashboard/types/endpoints';
+import useEndpointData from '../hooks/useEndpointData';
+import { useMemo } from 'react';
+import { formatLocalDateTime, fromNow } from '@ws-dashboard/date';
 
 export default function Toolbar() {
   return (
@@ -10,17 +13,35 @@ export default function Toolbar() {
 }
 
 const LastUpdated = () => {
+  const { latestEndpointData } = useEndpointData();
+  const lastUpdatedTime = useMemo(() => {
+    if (!latestEndpointData) return undefined;
+
+    return formatLocalDateTime(latestEndpointData.date);
+  }, [latestEndpointData]);
+  const timeFromNow = useMemo(() => {
+    if (!latestEndpointData) return undefined;
+
+    return fromNow(latestEndpointData.date);
+  }, [latestEndpointData]);
+
   return (
     <span className="text-xs text-gray-600">
-      Last Updated: 2024-08-31 12:24:32 UTC (3 mins ago)
+      Last Updated: {lastUpdatedTime} ({timeFromNow})
     </span>
   );
 };
 
 const RegionSelect = () => {
+  const { region, setRegion } = useEndpointData();
+
   return (
     <label className="form-control w-full max-w-40">
-      <select className="select select-bordered select-sm md:select-md">
+      <select
+        className="select select-bordered select-sm md:select-md"
+        onChange={(e) => setRegion(e.target.value as Endpoint)}
+        value={region}
+      >
         <option disabled>Select Region</option>
         {endpoints.map((endpoint) => (
           <option key={endpoint} value={endpoint}>

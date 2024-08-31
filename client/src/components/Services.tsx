@@ -1,13 +1,27 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { FaRegWindowRestore } from 'react-icons/fa';
 import Card from './Card';
+import useEndpointData from '../hooks/useEndpointData';
 
 export function Services() {
+  const { latestEndpointData } = useEndpointData();
+
+  const services = useMemo<[string, boolean][] | undefined>(() => {
+    if (!latestEndpointData) return undefined;
+
+    return Object.entries(latestEndpointData.response.results.services);
+  }, [latestEndpointData]);
+
+  if (!services) return null;
+
   return (
     <Card title="Services" desc="Running Services" icon={FaRegWindowRestore}>
       <div className="flex flex-col gap-2">
-        <Badge status={true}>Redis</Badge>
-        <Badge status={true}>Database</Badge>
+        {services.map(([serviceName, serviceStatus]) => (
+          <Badge key={serviceName} status={serviceStatus}>
+            {serviceName}
+          </Badge>
+        ))}
       </div>
     </Card>
   );

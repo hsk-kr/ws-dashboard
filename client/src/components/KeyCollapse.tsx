@@ -17,7 +17,7 @@ export default function KeyCollapse({ title, data = [] }: KeyCollapseProps) {
 
   const copy = (text: string) => () => {
     navigator.clipboard.writeText(text);
-    showToast('Copied!');
+    showToast({ type: 'default', message: 'Copied!' });
   };
 
   return (
@@ -30,17 +30,19 @@ export default function KeyCollapse({ title, data = [] }: KeyCollapseProps) {
       </button>
       {!fold && (
         <div className="text-xs text-gray-500 my-2 w-full flex flex-wrap break-all">
-          {data.map((d) => (
-            <div
-              className="flex group cursor-pointer"
-              onClick={copy(JSON.stringify(d))}
-            >
-              <FaCopy className="hidden text-black group-hover:block" />
-              <span className=" group-hover:text-black group-hover:font-bold transition-all">
-                {JSON.stringify(d)}
-              </span>
-            </div>
-          ))}
+          {data.length === 0 && 'None'}
+          {data.length > 0 &&
+            data.map((d) => (
+              <div
+                className="flex group cursor-pointer"
+                onClick={copy(JSON.stringify(d))}
+              >
+                <FaCopy className="hidden text-black group-hover:block" />
+                <span className=" group-hover:text-black group-hover:font-bold transition-all">
+                  {JSON.stringify(d)}
+                </span>
+              </div>
+            ))}
         </div>
       )}
     </div>

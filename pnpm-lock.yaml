@@ -20,6 +20,9 @@ importers:
       '@ws-dashboard/data':
         specifier: workspace:*
         version: link:../packages/data
+      '@ws-dashboard/date':
+        specifier: workspace:*
+        version: link:../packages/date
       react:
         specifier: ^18.3.1
         version: 18.3.1

@@ -1,54 +1,19 @@
 import { FaCogs } from 'react-icons/fa';
+
 import Card from './Card';
 import Table from './Table';
-import { Worker } from '@ws-dashboard/types/api';
 import KeyCollapse from './KeyCollapse';
+import useEndpointData from '../hooks/useEndpointData';
+import { useMemo } from 'react';
 
 export default function Workers() {
-  const workers: Worker[] = [
-    [
-      'requests:pageviews',
-      {
-        wait_time: 0,
-        workers: 0,
-        waiting: 0,
-        idle: 0,
-        time_to_return: 0,
-        recently_blocked_keys: [],
-        top_keys: [],
-      },
-    ],
-    [
-      'io',
-      {
-        wait_time: 0,
-        workers: 563,
-        waiting: 0,
-        idle: 55,
-        time_to_return: 0,
-        recently_blocked_keys: [['3FG7RD4yF6', 1, '2024-08-31T13:41:15.300Z']],
-        top_keys: [
-          ['Bvy5aLQrQE', 0.08041237113402062],
-          ['3FG7RD4yF6', 0.18556701030927836],
-          ['rZxAi6fCTu', 0.06804123711340206],
-          ['qPYBL4bhqo', 0.2824742268041237],
-          ['k3C7AAdW8o', 0.088659793814433],
-        ],
-      },
-    ],
-    [
-      'requests:unsupported-users',
-      {
-        wait_time: 0,
-        workers: 0,
-        waiting: 0,
-        idle: 0,
-        time_to_return: 0,
-        recently_blocked_keys: [],
-        top_keys: [],
-      },
-    ],
-  ];
+  const { latestEndpointData } = useEndpointData();
+  const workers = useMemo(() => {
+    if (!latestEndpointData) return undefined;
+    return latestEndpointData.response.results.stats.server.workers;
+  }, [latestEndpointData]);
+
+  if (!workers) return null;
 
   return (
     <div className="my-8 flex flex-col gap-4">
