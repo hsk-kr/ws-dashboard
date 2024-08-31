@@ -1,11 +1,14 @@
 import { EndpointDataProvider } from './store/EndpointDataContext';
 import Dashboard from './pages/Dashboard';
+import { ToastProvider } from './store/ToastContext';
 
 function App() {
   return (
-    <EndpointDataProvider>
-      <Dashboard />
-    </EndpointDataProvider>
+    <ToastProvider>
+      <EndpointDataProvider>
+        <Dashboard />
+      </EndpointDataProvider>
+    </ToastProvider>
   );
 }
 

@@ -4,5 +4,5 @@ import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
 
 export const getCurrentDateTimeAsString = () => {
-	return dayjs().utc().format();
+  return dayjs().utc().format();
 };

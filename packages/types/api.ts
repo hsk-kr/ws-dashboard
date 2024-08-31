@@ -41,7 +41,7 @@ export interface WorkerData {
 export type Services = Record<string, boolean>;
 
 // Worker Name | WorkerData
-export type Worker = [string, Worker];
+export type Worker = [string, WorkerData];
 
 //! I guess the meanings of the field, it could be wrong
 // Hashcode | Id | Date

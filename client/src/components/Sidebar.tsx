@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { IconType } from 'react-icons';
-import { TbLayoutDashboard } from 'react-icons/tb';
 import { IoIosPie } from 'react-icons/io';
+import Logo from './Logo';
 
 export default function Sidebar() {
   return (
@@ -39,13 +39,5 @@ const NavLink = ({
       {Icon && <Icon className="text-xl" />}
       {children}
     </li>
-  );
-};
-
-const Logo = () => {
-  return (
-    <div className="w-14 h-14 flex justify-center items-center bg-indigo-500 rounded">
-      <TbLayoutDashboard color="white" className="text-3xl" />
-    </div>
   );
 };

@@ -11,7 +11,7 @@ export default function Toolbar() {
 
 const LastUpdated = () => {
   return (
-    <span className="text-sm text-slate-500">
+    <span className="text-xs text-gray-600">
       Last Updated: 2024-08-31 12:24:32 UTC (3 mins ago)
     </span>
   );
@@ -20,10 +20,12 @@ const LastUpdated = () => {
 const RegionSelect = () => {
   return (
     <label className="form-control w-full max-w-40">
-      <select className="select select-bordered">
+      <select className="select select-bordered select-sm md:select-md">
         <option disabled>Select Region</option>
         {endpoints.map((endpoint) => (
-          <option value={endpoint}>{endpoint}</option>
+          <option key={endpoint} value={endpoint}>
+            {endpoint}
+          </option>
         ))}
       </select>
     </label>
