@@ -5,7 +5,7 @@ import { formatLocalDateTime, fromNow } from '@ws-dashboard/date';
 
 export default function Toolbar() {
   return (
-    <div className="flex px-4 py-4 items-center justify-between">
+    <div className="flex px-4 py-4 items-center justify-between bg-white">
       <LastUpdated />
       <RegionSelect />
     </div>

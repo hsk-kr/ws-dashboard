@@ -5,7 +5,7 @@ import Logo from './Logo';
 
 export default function Sidebar() {
   return (
-    <div className="px-8 py-10 w-80">
+    <div className="px-8 py-10 w-80 bg-white">
       <div className="flex gap-3 items-center mb-12 cursor-pointer">
         <Logo />
         <h1 className="text-2xl">Dashboard</h1>
