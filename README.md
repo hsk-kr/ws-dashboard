@@ -1,5 +1,19 @@
 # Dashboard
 
+# How to Run - Dev
+
+1. Install Docker
+
+- https://docs.docker.com/engine/install/
+
+2. Execute Script with Package Manager
+
+```
+> pnpm run compose
+```
+
+3. Open http://localhost:5173/
+
 # Scripts
 
 - `compose`: Run client, server, and worker using docker compose. server and client will be run on watch mode.
