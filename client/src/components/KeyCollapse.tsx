@@ -32,8 +32,9 @@ export default function KeyCollapse({ title, data = [] }: KeyCollapseProps) {
         <div className="text-xs text-gray-500 my-2 w-full flex flex-wrap break-all">
           {data.length === 0 && 'None'}
           {data.length > 0 &&
-            data.map((d) => (
+            data.map((d, dIdx) => (
               <div
+                key={dIdx}
                 className="flex group cursor-pointer"
                 onClick={copy(JSON.stringify(d))}
               >
