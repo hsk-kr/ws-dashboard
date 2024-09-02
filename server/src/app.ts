@@ -20,24 +20,6 @@ const subscriber = new Redis({
 
 let latestEndpointDataList: EndpointDataMap[] = [];
 
-// WebSocket Server
-const wss = new WebSocket.Server({ port }, () => {
-	console.log(`WebSocket Server Listening ${port}`);
-});
-
-wss.on('connection', (ws: WebSocket) => {
-	console.log('client connected');
-	sendLatestEndpointDataList(ws);
-
-	ws.on('error', (e) => {
-		console.error('client connection error', e);
-	});
-
-	ws.on('close', () => {
-		console.log('client disconnected');
-	});
-});
-
 const updateLatestEndpointDataList = async () => {
 	latestEndpointDataList = await getEndpointDataMapList(redis);
 };
@@ -53,6 +35,27 @@ const broadcastLatestEndpointDataList = () => {
 	});
 };
 
+// WebSocket Server
+const server = () => {
+	const wss = new WebSocket.Server({ port }, () => {
+		console.log(`WebSocket Server Listening ${port}`);
+	});
+	
+	wss.on('connection', async (ws: WebSocket) => {
+		console.log('client connected');
+	
+		ws.on('error', (e) => {
+			console.error('client connection error', e);
+		});
+	
+		ws.on('close', () => {
+			console.log('client disconnected');
+		});
+	
+		sendLatestEndpointDataList(ws);
+	});
+};
+
 // Redis
 const onEndpointDataChange = async () => {
 	await updateLatestEndpointDataList();
@@ -60,3 +63,6 @@ const onEndpointDataChange = async () => {
 };
 
 subscribeEndpointDataChange(subscriber, onEndpointDataChange);
+
+// Main
+updateLatestEndpointDataList().then(server);
