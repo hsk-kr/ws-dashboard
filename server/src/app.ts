@@ -24,19 +24,8 @@ const updateLatestEndpointDataList = async () => {
 	latestEndpointDataList = await getEndpointDataMapList(redis);
 };
 
-const sendLatestEndpointDataList = (ws: WebSocket) => {
-	const data = wrapData('endpointData', latestEndpointDataList);
-	ws.send(data);
-};
-
-const broadcastLatestEndpointDataList = () => {
-	wss.clients.forEach((client) => {
-		sendLatestEndpointDataList(client);
-	});
-};
-
-// WebSocket Server
 const server = () => {
+	// WebSocket Server
 	const wss = new WebSocket.Server({ port }, () => {
 		console.log(`WebSocket Server Listening ${port}`);
 	});
@@ -54,15 +43,28 @@ const server = () => {
 	
 		sendLatestEndpointDataList(ws);
 	});
+	
+	const sendLatestEndpointDataList = (ws: WebSocket) => {
+		const data = wrapData('endpointData', latestEndpointDataList);
+		ws.send(data);
+	};
+	
+	const broadcastLatestEndpointDataList = () => {
+		wss.clients.forEach((client) => {
+			sendLatestEndpointDataList(client);
+		});
+	};
+
+	// Redis
+	const onEndpointDataChange = async () => {
+		await updateLatestEndpointDataList();
+		broadcastLatestEndpointDataList();
+	};
+
+	subscribeEndpointDataChange(subscriber, onEndpointDataChange);
 };
 
-// Redis
-const onEndpointDataChange = async () => {
-	await updateLatestEndpointDataList();
-	broadcastLatestEndpointDataList();
-};
 
-subscribeEndpointDataChange(subscriber, onEndpointDataChange);
 
 // Main
 updateLatestEndpointDataList().then(server);
