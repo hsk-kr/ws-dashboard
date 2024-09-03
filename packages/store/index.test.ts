@@ -11,7 +11,7 @@ test('The length of the endpoint should be 1 after adding one time', async () =>
 	expect(await getEndpointDataMapList(redis)).length(1);
 });
 
-test("endPointdata shouldn't be over 5 items.", async () => {
+test("endPointdata shouldn't be over 30 items.", async () => {
 	for (let i = 1; i <= 31; i++) {
 		await addEndpointDataMap(redis, {} as any);
 	}
